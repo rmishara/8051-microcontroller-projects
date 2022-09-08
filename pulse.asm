@@ -1,0 +1,54 @@
+ORG	0000H
+
+
+L1:	JNB	
+
+ORG 0003H
+
+START
+	LCALL	INTERRUPT
+
+	
+
+ORG	0010H
+
+
+	
+	MOV	TMOD, #00000110B
+
+START:	SETB	P0.0
+	
+	SETB	TR0
+
+MAIN:	
+	SETB	P0.0
+	
+	MOV	TH0, #0FBH
+	
+	MOV	TL0, #0F7H
+	
+	JNB	TF0, L1
+
+
+
+INTERRUPT:	
+	CLR	P0.0
+	
+	CLR	TR0
+	
+	MOV	R1, #006h
+	
+	MOV	R0, #0AAh
+	
+	DJNZ	R0, $
+	
+	DJNZ	R1, $-4
+	
+	SETB	P0.0
+	
+	RET
+	
+	END
+	
+	END
+
